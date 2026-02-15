@@ -1,0 +1,48 @@
+# ── Python ────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+build/
+dist/
+wheels/
+*.egg-info/
+*.egg
+
+# ── Virtual environments ─────────────────────────────────────────────
+.venv/
+venv/
+
+# ── Environment variables ────────────────────────────────────────────
+.env
+.env.*
+!.env.example
+
+# ── IDE / Editors ────────────────────────────────────────────────────
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# ── Node / Frontend ──────────────────────────────────────────────────
+node_modules/
+.next/
+out/
+npm-debug.log*
+
+# ── ML models (large binaries) ──────────────────────────────────────
+*.joblib
+*.h5
+*.onnx
+
+# ── Docker ───────────────────────────────────────────────────────────
+postgres_data/
+
+# ── Misc ─────────────────────────────────────────────────────────────
+*.log
+.coverage
+htmlcov/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/

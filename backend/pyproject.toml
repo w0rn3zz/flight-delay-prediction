@@ -1,0 +1,21 @@
+[project]
+name = "api-ml"
+version = "0.1.0"
+description = "Flight Delay Prediction API"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "alembic",
+    "asyncpg",
+    "catboost",
+    "fastapi",
+    "joblib",
+    "lightgbm",
+    "numpy",
+    "pandas",
+    "pydantic>=2",
+    "pydantic-settings>=2",
+    "scikit-learn>=1.8.0",
+    "sqlalchemy[asyncio]>=2",
+    "uvicorn",
+]
