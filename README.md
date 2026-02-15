@@ -80,7 +80,7 @@ alembic upgrade head
 ## 📁 Project Structure
 
 ```
-api-ml/
+flight-delay-prediction/
 ├── docker-compose.yml          # Orchestrates all services
 ├── docker/
 │   └── scripts/
