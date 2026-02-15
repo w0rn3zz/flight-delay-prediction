@@ -1,4 +1,5 @@
 import pickle
+import logging
 from pathlib import Path
 from typing import Any
 
@@ -25,7 +26,18 @@ class LightGBMOptimizedAgent(BaseMLAgent):
 
     def preprocess(self, data: dict[str, Any]) -> np.ndarray:
         if self.encoders is None:
-            raise RuntimeError("Label encoders not available for LightGBM")
+            logging.getLogger(__name__).warning(
+                "Label encoders not available for LightGBM — using fallback encoding (zeros)"
+            )
+            # Fallback numeric encoding: use 0 for unknown categories.
+            carrier_enc = 0
+            origin_enc = 0
+            dest_enc = 0
+        else:
+            carrier_enc = self.encoders["UniqueCarrier"].transform([data["carrier"]])[0]
+            origin_enc = self.encoders["Origin"].transform([data["origin"]])[0]
+            dest_enc = self.encoders["Dest"].transform([data["dest"]])[0]
+
         return np.array(
             [
                 [
@@ -33,9 +45,9 @@ class LightGBMOptimizedAgent(BaseMLAgent):
                     data["day_of_month"],
                     data["day_of_week"],
                     data["dep_time"],
-                    self.encoders["UniqueCarrier"].transform([data["carrier"]])[0],
-                    self.encoders["Origin"].transform([data["origin"]])[0],
-                    self.encoders["Dest"].transform([data["dest"]])[0],
+                    carrier_enc,
+                    origin_enc,
+                    dest_enc,
                     data["distance"],
                 ]
             ]
