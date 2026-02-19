@@ -6,16 +6,18 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libgomp1 \
     && rm -rf /var/lib/apt/lists/*
 
-COPY backend/pyproject.toml .
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
-RUN pip install --no-cache-dir uv
+COPY backend/pyproject.toml backend/uv.lock ./
 
-RUN uv sync
+RUN uv sync --frozen --no-install-project
+
+COPY backend/ .
 
 COPY docker/scripts/run.sh /app/run.sh
 RUN chmod +x /app/run.sh
 
-COPY backend .
+ENV PATH="/app/.venv/bin:$PATH"
 
 EXPOSE 8000
 
